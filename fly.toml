@@ -1,0 +1,42 @@
+# fly.toml app configuration file generated for squidproxytokyo on 2023-11-27T07:13:40Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "squidproxytokyo"
+primary_region = "nrt"
+
+[experimental]
+  auto_rollback = true
+
+[build]
+
+[http_service]
+  internal_port = 3128
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 3128
+
+  [[services.ports]]
+    port = 3128
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 2000
+    soft_limit = 2000
+
+[[services]]
+  protocol = "udp"
+  internal_port = 3128
+
+  [[services.ports]]
+    port = 3128
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 2000
+    soft_limit = 2000

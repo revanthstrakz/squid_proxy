@@ -24,4 +24,4 @@ RUN chgrp -R 0 /apps && chmod -R g=u /apps
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 EXPOSE 3128
-#CMD ["/usr/bin/supervisord"]
+ENTRYPOINT ["/apps/squid/sbin/squid", "-NsY" ,"-f", "/apps/squid.conf.forward", "&"]
