@@ -6,7 +6,7 @@ RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 WORKDIR /apps/
 RUN wget -O - http://www.squid-cache.org/Versions/v5/squid-5.7.tar.gz | tar zxfv - \
-    && CPU=$(( `nproc --all`-1 )) \
+    && CPU=$(( `nproc --all` )) \
     && cd /apps/squid-5.7/ \
     && ./configure --prefix=/apps/squid --enable-icap-client --enable-ssl --with-openssl --enable-ssl-crtd --enable-auth --enable-basic-auth-helpers="NCSA" \
     && make -j$CPU \
